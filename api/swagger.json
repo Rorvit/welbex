@@ -1,0 +1,237 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "Welbex"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Routes for authorization"
+    },
+    {
+      "name": "post",
+      "description": "Routes for CRUD"
+    },
+    {
+      "name": "files",
+      "description": "Routes for files"
+    }
+  ],
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "login",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "{ token }"
+          },
+          "404": {
+            "description": "user not found"
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "login",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "nickname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User { name } created"
+          },
+          "503": {
+            "description": "this login is already in use"
+          }
+        }
+      }
+    },
+    "/api/blog": {
+      "post": {
+        "tags": [
+          "post"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "message",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "files_id",
+            "required": true,
+            "schema": {
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "post"
+        ],
+        "summary": "",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "post"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "message",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "post"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/upload/": {
+      "post": {
+        "tags": [
+          "files"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "file",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "{ id }"
+          }
+        }
+      }
+    },
+    "/files/:id.ext": {
+      "get": {
+        "tags": [
+          "files"
+        ],
+        "summary": "",
+        "responses": {
+          "200": {
+            "description": "file"
+          }
+        }
+      }
+    }
+  }
+}
